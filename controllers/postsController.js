@@ -6,8 +6,8 @@ const index = (req, res) => {
     const tagQuery = req.query.tag
     console.log('Sei nella rotta INDEX')
 
-    if(tagQuery) {
-     filtredBytag = macchine.filter (macchina => macchina.tag.includes(tagQuery))   
+    if (tagQuery) {
+        filtredBytag = macchine.filter(macchina => macchina.tag.includes(tagQuery))
     }
 
     res.json(filtredBytag)
@@ -20,7 +20,7 @@ const store = (req, res) => {
     const newId = macchine.at(-1).id + 1
     const { marca, modello, cavalli, prezzo, tag } = req.body
     const newCar = {
-        id : newId,
+        id: newId,
         marca,
         modello,
         cavalli,
@@ -43,7 +43,7 @@ const show = (req, res) => {
         return res.json(
             {
                 status: 404,
-                error : 'Macchina non trovata'
+                error: 'Macchina non trovata'
             }
         )
     }
@@ -55,9 +55,27 @@ const show = (req, res) => {
 const update = (req, res) => {
     console.log('Sei nella rotta UPDATE')
     const id = parseInt(req.params.id)
+    const { marca, modello, cavalli, prezzo, tag } = req.body
+    const macchina = macchine.find(macchina => macchina.id === id)
+    
+    if(!macchina) {
+        res.status(404)
 
-    res.send(`Sta aggiornado la risorsa numero ${id}`)
+        return res.json({
+            status: 404,
+            error: 'Nessuna macchina da aggiornare'
+        })
+    }
+    
+    macchina.marca = marca
+    macchina.modello = modello
+    macchina.cavalli = cavalli
+    macchina.prezzo = prezzo
+    macchina.tag = tag
 
+    console.log(macchine);
+    
+    res.json(macchina)
 }
 
 //MODIFY CONTROLLER
@@ -88,7 +106,7 @@ const destroy = (req, res) => {
         macchine.splice(macchine.indexOf(macchina), 1)
         console.log(macchine);
         res.sendStatus(204)
-        
+
 
     }
 
