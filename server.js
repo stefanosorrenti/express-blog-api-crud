@@ -1,24 +1,24 @@
+//IMPORTS
 const express = require('express')
 const { log } = require('node:console')
 const app = express()
 const port = 3000
 const postsRouter = require("./routers/posts")
 
-app.use(express.json())
-//ENTRY POINT
+app.use(express.json()) //MIDDLEWARE PER EFFETTUARE IL PARSING DEL REQUEST BODY
 
-app.get('/', (req, res) => {
-  res.send('Sei nel server!')
+//ENTRY POINT
+app.get('/', (req, res) => { //ROUTER DEI MIEI POST 
+  res.send('Sei nel server dei post!')
 })
 
 
 //POSTS CRUD
-
-app.use("/macchine", postsRouter)
-
+app.use("/macchine", postsRouter) //Router che contiene le CRUD dei miei post, tutte le rotte dentro 'postRouter' iniziano con '/macchine'
 
 
 
-app.listen(port, () => {
+
+app.listen(port, () => { //Metodo per mettere il server il ascolto
   console.log(`Example app listening on port ${port}`)
 })

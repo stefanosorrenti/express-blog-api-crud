@@ -1,6 +1,10 @@
+//IMPORTS
 const express = require('express')
-const router = express.Router()
-const postsController = require('../controllers/postsController')
+const router = express.Router() //MIDDLEWARE PER 'ATTIVARE' IL ROUTER ED APPLICARE IL REFACTORING
+const postsController = require('../controllers/postsController') //IMPOSTO IL MIO CONTROLLER CHE SI OCCUPERA' DELLA LOGICA IN OGNI RISPETTIVA ROTTA
+
+//ESSENDO STATO ESPORTATO COME UN OGGETTO, USO LA DOT NOTATION PER SELEZIONARE LE CHIAVI VALORE CHE MI SERVONO PER OGNI ROTTA.
+
 //INDEX
 router.get('/', postsController.index )
 

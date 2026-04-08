@@ -11,4 +11,4 @@ const macchine = [
   { id: 10, marca: "Peugeot", modello: "208", cavalli: 100, prezzo: 20000, tag: ["citycar", "design", "compatta"] }
 ];
 
-module.exports = macchine;
+module.exports = macchine; //ESPORTO TUTTA LA MIA LOGICA NELLA VARIABILE MACCHINE.
