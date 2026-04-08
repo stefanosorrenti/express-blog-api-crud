@@ -1,54 +1,22 @@
 const express = require('express')
 const router = express.Router()
-
+const postsController = require('../controllers/postsController')
 //INDEX
-router.get('/', (req, res) => {
-  console.log('Sei nella rotta INDEX')
-
-  res.send('Queste sono tutte le mie risorse')
-})
+router.get('/', postsController.index )
 
 //SHOW
-router.get('/:id', (req, res) => {
-  const id = req.params.id
-  console.log('Sei nella rotta SHOW')
-
-  res.send(`Stai visualizzando  la risorsa numero ${id}`)
-
-})
+router.get('/:id', postsController.show )
 
 //STORE
-router.post('/', (req, res) => {
-  console.log('Sei nella rotta STORE');
-
-  res.send('Stai aggiungendo una nuova risorsa.')
-})
+router.post('/', postsController.store )
 
 //UPDATE
-router.put('/:id', (req, res) => {
-  console.log('Sei nella rotta UPDATE')
-  const id = req.params.id
-
-  res.send(`Sta aggiornado la risorsa numero ${id}`)
-
-})
+router.put('/:id', postsController.update )
 
 //MODIFY
-router.patch('/:id', (req, res) => {
-  console.log('Sei nella rotta MODIFY')
-  const id = req.params.id
-
-  res.send(`Sta aggiorando UNA PARTE della risorsa ${id}`)
-
-})
+router.patch('/:id', postsController.modify )
 
 //DESTROY
-router.delete('/:id', (req, res) => {
-  console.log('Sei nella rotta DESTROY')
-  const id = req.params.id
-
-  res.send(`Sto eliminando la risorsa ${id}`)
-  
-} )
+router.delete('/:id', postsController.destroy )
 
 module.exports = router;
