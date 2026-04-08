@@ -2,6 +2,7 @@ const express = require('express')
 const { log } = require('node:console')
 const app = express()
 const port = 3000
+const postsRouter = require("./routers/posts")
 const macchine = [
   { id: 1, marca: "Fiat", modello: "500", cavalli: 70, prezzo: 15000 },
   { id: 2, marca: "Volkswagen", modello: "Golf", cavalli: 110, prezzo: 25000 },
@@ -23,58 +24,12 @@ app.get('/', (req, res) => {
 })
 
 
+//POSTS CRUD
+
+app.use("/macchine", postsRouter)
 
 
 
-//INDEX
-app.get('/macchine', (req, res) => {
-  console.log('Sei nella rotta INDEX')
-
-  res.send('Queste sono tutte le mie risorse')
-})
-
-//SHOW
-app.get('/macchine/:id', (req, res) => {
-  const id = req.params.id
-  console.log('Sei nella rotta SHOW')
-
-  res.send(`Stai visualizzando  la risorsa numero ${id}`)
-
-})
-
-//STORE
-app.post('/macchine', (req, res) => {
-  console.log('Sei nella rotta STORE');
-
-  res.send('Stai aggiungendo una nuova risorsa.')
-})
-
-//UPDATE
-app.put('/macchine/:id', (req, res) => {
-  console.log('Sei nella rotta UPDATE')
-  const id = req.params.id
-
-  res.send(`Sta aggiornado la risorsa numero ${id}`)
-
-})
-
-//MODIFY
-app.patch('/macchine/:id', (req, res) => {
-  console.log('Sei nella rotta MODIFY')
-  const id = req.params.id
-
-  res.send(`Sta aggiorando UNA PARTE della risorsa ${id}`)
-
-})
-
-//DESTROY
-app.delete('/macchine/:id', (req, res) => {
-  console.log('Sei nella rotta DESTROY')
-  const id = req.params.id
-
-  res.send(`Sto eliminando la risorsa ${id}`)
-  
-} )
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
