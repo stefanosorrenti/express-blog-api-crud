@@ -2,9 +2,15 @@
 const macchine = require('../data/macchine')
 //INDEX CONTROLLER
 const index = (req, res) => {
+    let filtredBytag = macchine
+    const tagQuery = req.query.tag
     console.log('Sei nella rotta INDEX')
 
-    res.json(macchine)
+    if(tagQuery) {
+     filtredBytag = macchine.filter (macchina => macchina.tag.includes(tagQuery))   
+    }
+
+    res.json(filtredBytag)
 }
 
 //STORE CONTROLLER
@@ -23,7 +29,12 @@ const show = (req, res) => {
 
         res.status(404)
         console.log('ERRORE: Macchina non trovata');
-        return res.send('Macchina non trovata!')
+        return res.json(
+            {
+                status: 404,
+                error : 'Macchina non trovata'
+            }
+        )
     }
 
     res.send(macchina)
@@ -56,7 +67,12 @@ const destroy = (req, res) => {
     const macchina = macchine.find(macchina => macchina.id === id)
     if (!macchina) {
         res.status(404)
-        res.send('Elemento non trovato')
+        res.send(
+            {
+                status: 404,
+                error: 'Nessuna macchina da eliminare trovata'
+            }
+        )
     } else {
         macchine.splice(macchine.indexOf(macchina), 1)
         console.log(macchine);
