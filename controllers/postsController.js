@@ -16,7 +16,8 @@ const index = (req, res) => {
 //STORE CONTROLLER
 const store = (req, res) => {
     console.log('Sei nella rotta STORE');
-
+    console.log(req.body);
+    
     res.send('Stai aggiungendo una nuova risorsa.')
 }
 
