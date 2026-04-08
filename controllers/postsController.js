@@ -15,10 +15,20 @@ const index = (req, res) => {
 
 //STORE CONTROLLER
 const store = (req, res) => {
-    console.log('Sei nella rotta STORE');
-    console.log(req.body);
-    
-    res.send('Stai aggiungendo una nuova risorsa.')
+    console.log('Sei nella rotta STORE')
+    console.log(req.body)
+    const newId = macchine.at(-1).id + 1
+    const { marca, modello, cavalli, prezzo, tag } = req.body
+    const newCar = {
+        id : newId,
+        marca,
+        modello,
+        cavalli,
+        prezzo,
+        tag
+    }
+    macchine.push(newCar)
+    res.json(newCar)
 }
 
 //SHOW CONTROLLER
