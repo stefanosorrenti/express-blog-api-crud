@@ -4,11 +4,17 @@ const { log } = require('node:console')
 const app = express()
 const port = 3000
 const postsRouter = require("./routers/posts")
+const serverError = require("./middlewares/serverError")
 
 app.use(express.json()) //MIDDLEWARE PER EFFETTUARE IL PARSING DEL REQUEST BODY
 
 //ENTRY POINT
-app.get('/', (req, res) => { //ROUTER DEI MIEI POST 
+app.get('/', (req, res) => { //ROUTER DEI MIEI POST
+  
+  //ELEMENTO PER SCATENARE UN ERRORE LATO SERVER
+  //provaerrore 
+  //console.log(provaerrore);
+  
   res.send('Sei nel server dei post!')
 })
 
@@ -22,3 +28,6 @@ app.use("/macchine", postsRouter) //Router che contiene le CRUD dei miei post, t
 app.listen(port, () => { //Metodo per mettere il server il ascolto
   console.log(`Example app listening on port ${port}`)
 })
+
+
+app.use(serverError) //TRAMITE APP USE MI RICHIAMO LA CUSTOM MIDDLEWARE PER GESTIRMI L'ERRORE LATO SERVER
