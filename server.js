@@ -5,6 +5,7 @@ const app = express()
 const port = 3000
 const postsRouter = require("./routers/posts")
 const serverError = require("./middlewares/serverError")
+const clientError = require("./middlewares/clientError")
 
 app.use(express.json()) //MIDDLEWARE PER EFFETTUARE IL PARSING DEL REQUEST BODY
 
@@ -31,3 +32,5 @@ app.listen(port, () => { //Metodo per mettere il server il ascolto
 
 
 app.use(serverError) //TRAMITE APP USE MI RICHIAMO LA CUSTOM MIDDLEWARE PER GESTIRMI L'ERRORE LATO SERVER
+
+app.use(clientError) //TRAMITE APP USE MI RICHIAMO LA CUSTOM MIDDLEWARE PER GESTIRMI L'ERRORE 404
